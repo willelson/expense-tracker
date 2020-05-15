@@ -6,7 +6,7 @@ interface state {
   transactions: Array<transaction>;
 }
 
-interface transaction {
+export interface transaction {
   id: number;
   text: string;
   amount: number;
