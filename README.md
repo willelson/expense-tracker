@@ -1,4 +1,4 @@
-Following tutorial at https://www.youtube.com/watch?v=XuFDcZABiDQ
+Following expense tracker tutorial at https://www.youtube.com/watch?v=XuFDcZABiDQ but implementing with [TypeScript](https://www.typescriptlang.org/docs/home).
 
 ## Available Scripts
 
