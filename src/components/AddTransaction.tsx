@@ -15,8 +15,10 @@ export const AddTransaction = () => {
     const newTransaction: transaction = {
       id: Math.floor(Math.random() * 1000000000),
       text,
-      amount
+      amount,
     };
+    setText('');
+    setAmount(0);
 
     dispatch(addTransaction(newTransaction));
   };
@@ -29,6 +31,7 @@ export const AddTransaction = () => {
           <label htmlFor='text'>Text</label>
           <input
             type='text'
+            value={text}
             id='text'
             onChange={(e) => setText(e.target.value)}
             placeholder='Enter text...'
@@ -41,6 +44,8 @@ export const AddTransaction = () => {
           </label>
           <input
             type='number'
+            value={amount ? amount : ''}
+            step='0.01'
             id='amount'
             onChange={(e) => setAmount(parseFloat(e.target.value))}
             placeholder='Enter amount...'

@@ -14,7 +14,11 @@ export const Transaction: React.FunctionComponent<props> = (props: props) => {
   const sign = transaction.amount < 0 ? '-' : '+';
   return (
     <div>
-      <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
+      <li
+        className={`${
+          transaction.amount < 0 ? 'minus' : 'plus'
+        } transaction-text`}
+      >
         {transaction.text}{' '}
         <span>
           {sign}£{Math.abs(transaction.amount)}
