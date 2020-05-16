@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { GlobalContext } from '../context/GlobalState';
+import { addTransaction } from '../context/actions';
+import { transaction } from '../context/AppReducer';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+  const { dispatch } = useContext(GlobalContext);
+
+  const onSubmit = (e: React.SyntheticEvent<EventTarget>) => {
+    e.preventDefault();
+
+    const newTransaction: transaction = {
+      id: Math.floor(Math.random() * 1000000000),
+      text,
+      amount
+    };
+
+    dispatch(addTransaction(newTransaction));
+  };
+
   return (
-    <div>
+    <div onSubmit={onSubmit}>
       <h3>Add new transaction</h3>
       <form id='form'>
         <div className='form-control'>
