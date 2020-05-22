@@ -15,12 +15,14 @@ export const AddTransaction = () => {
     const newTransaction: transaction = {
       id: Math.floor(Math.random() * 1000000000),
       text,
-      amount,
+      amount
     };
-    setText('');
-    setAmount(0);
 
-    dispatch(addTransaction(newTransaction));
+    if (text && amount) {
+      dispatch(addTransaction(newTransaction));
+      setText('');
+      setAmount(0);
+    }
   };
 
   return (
@@ -51,7 +53,9 @@ export const AddTransaction = () => {
             placeholder='Enter amount...'
           />
         </div>
-        <button className='btn'>Add transaction</button>
+        <button className={`btn ${text && amount ? 'active' : ''}`}>
+          Add transaction
+        </button>
       </form>
     </div>
   );
