@@ -16,6 +16,9 @@ connectDB();
 const transactions = require('./routes/transactions');
 const app = express();
 
+// This will allow us to use the body middleware
+app.use(express.json());
+
 app.use('/api/v1/transactions', transactions);
 
 app.get('/', (req, res) => res.send('Hello'));
