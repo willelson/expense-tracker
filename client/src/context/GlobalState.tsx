@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from 'react';
+import axios from 'axios';
 import AppReducer from './AppReducer';
 
 import { transaction, action } from '../context/AppReducer';
+import { GET_TRANSACTIONS, TRANSACTION_ERROR } from './actions';
 
 interface globalContextType {
   transactions: transaction[];
