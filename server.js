@@ -19,6 +19,11 @@ const app = express();
 // This will allow us to use the body middleware
 app.use(express.json());
 
+// Set up morgan logging
+if (process.env.NODE_ENV == 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use('/api/v1/transactions', transactions);
 
 app.get('/', (req, res) => res.send('Hello'));
