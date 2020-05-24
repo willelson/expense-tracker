@@ -7,6 +7,8 @@ export interface action {
 
 interface state {
   transactions: Array<transaction>;
+  error: null;
+  loading: boolean;
 }
 
 export interface transaction {

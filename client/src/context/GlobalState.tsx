@@ -5,11 +5,15 @@ import { transaction, action } from '../context/AppReducer';
 
 interface globalContextType {
   transactions: transaction[];
+  error: string | null;
+  loading: boolean;
   dispatch: React.Dispatch<action>;
 }
 
 const initialState = {
   transactions: [],
+  error: null,
+  loading: true,
   dispatch: () => {}
 };
 
@@ -20,12 +24,13 @@ interface props {
 }
 
 export const GlobalProvider = ({ children }: props) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [{ transactions, error, loading }, dispatch] = useReducer(
+    AppReducer,
+    initialState
+  );
 
   return (
-    <GlobalContext.Provider
-      value={{ transactions: state.transactions, dispatch }}
-    >
+    <GlobalContext.Provider value={{ transactions, dispatch, error, loading }}>
       {children}
     </GlobalContext.Provider>
   );
