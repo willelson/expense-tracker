@@ -17,7 +17,7 @@ interface state {
 }
 
 export interface transaction {
-  id: number;
+  _id: string;
   text: string;
   amount: number;
 }
@@ -34,7 +34,7 @@ export default (state: state, action: action) => {
       return {
         ...state,
         transactions: state.transactions.filter(
-          (transaction) => transaction.id !== action.payload
+          (transaction) => transaction._id !== action.payload
         )
       };
     case ADD_TRANSACTION:

@@ -25,7 +25,7 @@ export const Transaction: React.FunctionComponent<props> = (props: props) => {
         </span>
         <button
           className='delete-btn'
-          onClick={() => dispatch(deleteTransaction(transaction.id))}
+          onClick={() => dispatch(deleteTransaction(transaction._id))}
         >
           x
         </button>

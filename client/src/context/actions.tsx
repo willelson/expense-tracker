@@ -7,11 +7,19 @@ export const ADD_TRANSACTION: string = 'ADD_TRANSACTION';
 export const GET_TRANSACTIONS: string = 'GET_TRANSACTIONS';
 export const TRANSACTION_ERROR: string = 'TRANSACTION_ERROR';
 
-export function deleteTransaction(id: number): any {
-  return {
-    type: 'DELETE_TRANSACTION',
-    payload: id
-  };
+export function deleteTransaction(id: string): any {
+  try {
+    axios.delete(`api/v1/transactions/${id}`);
+    return {
+      type: 'DELETE_TRANSACTION',
+      payload: id
+    };
+  } catch (err) {
+    return {
+      type: TRANSACTION_ERROR,
+      payload: err.response.data.error
+    };
+  }
 }
 
 export function addTransaction(transaction: transaction): any {
