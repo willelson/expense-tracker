@@ -1,6 +1,10 @@
 import { transaction, action } from '../context/AppReducer';
 import axios from 'axios';
 
+interface Iconfig {
+  headers: object;
+}
+
 // action types
 export const DELETE_TRANSACTION: string = 'DELETE_TRANSACTION';
 export const ADD_TRANSACTION: string = 'ADD_TRANSACTION';
@@ -22,11 +26,37 @@ export function deleteTransaction(id: string): any {
   }
 }
 
-export function addTransaction(transaction: transaction): any {
-  return {
-    type: 'ADD_TRANSACTION',
-    payload: transaction
+export async function addTransaction(
+  transaction: transaction,
+  dispatch: React.Dispatch<action>
+): Promise<any> {
+  const config: Iconfig = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
   };
+
+  const postTransaction = {
+    text: transaction.text,
+    amount: transaction.amount
+  };
+
+  try {
+    const res = await axios.post(
+      'api/v1/transactions',
+      postTransaction,
+      config
+    );
+    dispatch({
+      type: 'ADD_TRANSACTION',
+      payload: res.data.data
+    });
+  } catch (err) {
+    dispatch({
+      type: TRANSACTION_ERROR,
+      payload: err.response.data.error
+    });
+  }
 }
 
 export async function getTransactions(

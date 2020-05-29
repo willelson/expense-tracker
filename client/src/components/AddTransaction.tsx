@@ -19,7 +19,7 @@ export const AddTransaction = () => {
     };
 
     if (text && amount) {
-      dispatch(addTransaction(newTransaction));
+      addTransaction(newTransaction, dispatch);
       setText('');
       setAmount(0);
     }
