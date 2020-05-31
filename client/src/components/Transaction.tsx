@@ -3,6 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 import { transaction } from '../context/AppReducer';
 import { deleteTransaction } from '../context/actions';
+import { displayAmount } from '../utils/format';
 
 interface props {
   transaction: transaction;
@@ -11,7 +12,7 @@ interface props {
 export const Transaction: React.FunctionComponent<props> = (props: props) => {
   const { dispatch } = useContext(GlobalContext);
   const { transaction } = props;
-  const sign = transaction.amount < 0 ? '-' : '+';
+
   return (
     <div>
       <li
@@ -19,10 +20,7 @@ export const Transaction: React.FunctionComponent<props> = (props: props) => {
           transaction.amount < 0 ? 'minus' : 'plus'
         } transaction-text`}
       >
-        {transaction.text}{' '}
-        <span>
-          {sign}£{Math.abs(transaction.amount)}
-        </span>
+        {transaction.text} <span>{displayAmount(transaction.amount)}</span>
         <button
           className='delete-btn'
           onClick={() => dispatch(deleteTransaction(transaction._id))}
